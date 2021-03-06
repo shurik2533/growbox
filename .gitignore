@@ -1,0 +1,12 @@
+*.py[cod]
+
+.idea/
+*.iml
+atlassian-ide-plugin.xml
+
+*.egg
+*.egg-info
+dist/
+build/
+eggs/
+.eggs/
