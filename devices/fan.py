@@ -17,15 +17,21 @@ p2 = GPIO.PWM(27, 25000)    # create an object p for PWM on port 25 at 50 Hertz
 # different names for each port
 # e.g. p1, p2, motor, servo1 etc.
 
-p1.start(50)             # start the PWM on 50 percent duty cycle
-p2.start(10)             # start the PWM on 50 percent duty cycle
+p1.start(100)             # start the PWM on 50 percent duty cycle
+p2.start(0)             # start the PWM on 50 percent duty cycle
 # duty cycle value can be 0.0 to 100.0%, floats are OK
 
 #p1.ChangeDutyCycle(10)   # change the duty cycle to 90%
 
 # e.g. 100.5, 5.2
 
-time.sleep(10)
+time.sleep(5)
+
+p1.ChangeDutyCycle(0)
+p2.ChangeDutyCycle(100)
+
+time.sleep(5)
+
 
 p1.stop()
 p2.stop()        # stop the PWM output
