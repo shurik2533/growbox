@@ -6,6 +6,8 @@ os.system('modprobe w1-gpio')
 os.system('modprobe w1-therm')
 
 DEVICES_DIR = '/sys/bus/w1/devices/'
+t1 = '28-3c01d07524fa'
+t2 = '28-3c01d075439b'
 
 
 def get_temperature():
