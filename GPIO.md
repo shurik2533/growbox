@@ -1,4 +1,4 @@
 # Reserved GPIO pins
 - 4 - thermometers
 - 17 - fan1
-- 27 - fan2
+- 21 - fan2
