@@ -47,8 +47,12 @@ class TempController:
         lines = None
         # TODO: логирование/оповещение, что термометр пропал
         while not lines or len(lines) == 0 or lines[0].strip()[-3:] != 'YES':
-            with open(device_file, 'r') as f:
-                lines = f.readlines()
+            try:
+                with open(device_file, 'r') as f:
+                    lines = f.readlines()
+            except FileNotFoundError:
+                LOGGER.warn(f'file {device_file} not found')
+                time.sleep(3)
             if not lines:
                 time.sleep(0.2)
 
