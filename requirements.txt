@@ -1,2 +1,2 @@
 schedule==1.0.0
-json-logging-1.2.11
+json-logging==1.2.11
