@@ -10,3 +10,5 @@ dist/
 build/
 eggs/
 .eggs/
+
+logs/*
