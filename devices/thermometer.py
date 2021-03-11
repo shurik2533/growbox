@@ -39,7 +39,10 @@ class TempController:
         if temp_new >= MAX_TEMPERATURE:
             self.pwm_speed = 100
         elif temp_new <= NORMAL_TEMPERATURE:
-            self.pwm_speed = 0
+            if self.name == 'top':
+                self.pwm_speed = 10
+            else:
+                self.pwm_speed = 0
         elif temp_new > NORMAL_TEMPERATURE and self.pwm_speed <= 95:
             self.pwm_speed = self.pwm_speed + 5
         self.fan.set_speed(self.pwm_speed)
