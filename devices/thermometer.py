@@ -9,6 +9,7 @@ os.system('modprobe w1-therm')
 DEVICE_PATH = '/sys/bus/w1/devices/{device_id}/w1_slave'
 DEVICE_ID_TOP = '28-3c01d075439b'
 DEVICE_ID_BOTTOM = '28-3c01d07524fa'
+DEVICE_ID_EXTERNAL = '28-3c01d6071af0'
 DEVICE_ID_MAP = {
     'top': DEVICE_ID_TOP,
     'bottom': DEVICE_ID_BOTTOM
@@ -26,8 +27,13 @@ class TempController:
         self.state = state
 
     def temp_control(self):
-        temp_new = self.get_temperature()
+        temp_new = self.get_temperature(DEVICE_ID_MAP[self.name])
         self.update_pwm(temp_new)
+
+    def check_external_temperature(self):
+        temp_external = self.get_temperature(DEVICE_ID_EXTERNAL)
+        self.state['thermometer']['external'] = temp_external
+        LOGGER.info(self.state)
 
     def update_pwm(self, temp_new):
         if temp_new >= MAX_TEMPERATURE:
@@ -41,8 +47,7 @@ class TempController:
         self.state['thermometer'][self.name] = temp_new
         LOGGER.info(self.state)
 
-    def get_temperature(self):
-        device_id = DEVICE_ID_MAP[self.name]
+    def get_temperature(self, device_id):
         device_file = DEVICE_PATH.format(device_id=device_id)
         lines = None
         # TODO: логирование/оповещение, что термометр пропал
