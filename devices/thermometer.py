@@ -33,7 +33,7 @@ class TempController:
     def check_external_temperature(self):
         temp_external = self.get_temperature(DEVICE_ID_EXTERNAL)
         self.state['thermometer']['external'] = temp_external
-        LOGGER.info(self.state)
+        LOGGER.info('State', extra=self.state)
 
     def update_pwm(self, temp_new):
         if temp_new >= MAX_TEMPERATURE:
@@ -43,12 +43,12 @@ class TempController:
                 self.pwm_speed = 10
             else:
                 self.pwm_speed = 0
-        elif temp_new > NORMAL_TEMPERATURE and self.pwm_speed <= 95:
-            self.pwm_speed = self.pwm_speed + 5
+        elif temp_new > NORMAL_TEMPERATURE and self.pwm_speed <= 90:
+            self.pwm_speed = self.pwm_speed + 10
         self.fan.set_speed(self.pwm_speed)
         self.state['fan'][self.name] = self.pwm_speed
         self.state['thermometer'][self.name] = temp_new
-        LOGGER.info(self.state)
+        LOGGER.info('State', extra=self.state)
 
     def get_temperature(self, device_id):
         device_file = DEVICE_PATH.format(device_id=device_id)
