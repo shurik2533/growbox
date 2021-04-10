@@ -44,13 +44,13 @@ print('Reading ADS1x15 values, press Ctrl-C to quit...')
 print('| {0:>6} | {1:>6} |'.format(*range(4)))
 print('-' * 19)
 # Main loop.
-channels = 2
+channels = 4
 while True:
     # Read all the ADC channel values in a list.
     values = [0]*channels
     for i in range(channels):
         # Read the specified ADC channel using the previously set gain value.
-        values[i] = get_moisture(adc.read_adc(i, gain=GAIN))
+        values[i] = adc.read_adc(i, gain=GAIN, data_rate=128)
         # Note you can also pass in an optional data_rate parameter that controls
         # the ADC conversion time (in samples/second). Each chip has a different
         # set of allowed data rate values, see datasheet Table 9 config register
@@ -61,5 +61,5 @@ while True:
     # Print the ADC values.
     print('| {0:>6} | {1:>6} |'.format(*values))
     # Pause for half a second.
-    time.sleep(0.5)
+    time.sleep(1)
 
