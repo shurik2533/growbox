@@ -27,8 +27,8 @@ def main():
         temp_top = TempController('top', fan_top, STATE)
         temp_bottom = TempController('bottom', fan_bottom, STATE)
 
-        schedule.every(5).seconds.do(temp_top.temp_control)
-        schedule.every(5).seconds.do(temp_bottom.temp_control)
+        schedule.every(10).seconds.do(temp_top.temp_control)
+        schedule.every(10).seconds.do(temp_bottom.temp_control)
         schedule.every(20).seconds.do(temp_top.check_external_temperature)
 
         while True:
