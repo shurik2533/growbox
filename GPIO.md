@@ -2,4 +2,6 @@
 - 4 - thermometers
 - 17 - fan_top
 - 27 - fan_bottom
-- 7, 8, 25 - relay in 1, 2, 3
+- 8, 25 - relay, light
+- 7 - relay, heat
+- 9, 11 - relay, pump

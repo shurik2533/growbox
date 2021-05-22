@@ -1,6 +1,5 @@
 from devices.fan import Fan, FAN_TOP_PIN, FAN_BOTTOM_PIN, MAX_SPEED
 from devices.thermometer import Thermometer, DEVICE_ID_TOP, DEVICE_ID_BOTTOM
-from logger import LOGGER
 
 MAX_TEMPERATURE = 26
 NORMAL_TEMPERATURE = 24
@@ -33,7 +32,6 @@ class TemperatureController:
         self.state['fan'][name] = speed
         self.state['thermometer'][name] = temperature
 
-    def __exit__(self, exc_type, exc_value, traceback):
+    def stop(self):
         self.fan_top.stop()
         self.fan_bottom.stop()
-        LOGGER('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
