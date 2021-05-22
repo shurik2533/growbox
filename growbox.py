@@ -8,8 +8,6 @@ from controllers.temperature_controller import TemperatureController
 from devices.fan import MAX_SPEED
 from logger import LOGGER
 
-GPIO.setmode(GPIO.BCM)
-
 
 STATE = {
     'fan': {

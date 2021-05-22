@@ -1,6 +1,8 @@
 import RPi.GPIO as GPIO
 
 
+GPIO.setmode(GPIO.BCM)
+
 LIGHT_1 = 8
 LIGHT_2 = 25
 HEAT = 7
