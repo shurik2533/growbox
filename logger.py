@@ -24,11 +24,10 @@ class Formatter(logging.Formatter):
         return s
 
 def _get_logger():
-    json_logging.init_non_web(enable_json=True)
+    json_logging.init_non_web(enable_json=True, custom_formatter=Formatter("%(asctime)s %(message)s"))
     logger = logging.getLogger(__name__)
     logger.setLevel(logging.DEBUG)
     handler = logging.StreamHandler(sys.stdout)
-    handler.setFormatter(Formatter("%(asctime)s %(message)s"))
     logger.addHandler(handler)
     return logger
 
