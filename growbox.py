@@ -5,11 +5,10 @@ import RPi.GPIO as GPIO
 from controllers.sensors_data_collector import SensorsDataCollector
 from controllers.temperature_controller import TemperatureController
 from devices.fan import MAX_SPEED
-from logger import get_logger
+from logger import LOGGER
 
 GPIO.setmode(GPIO.BCM)
 
-LOGGER = get_logger()
 
 STATE = {
     'fan': {

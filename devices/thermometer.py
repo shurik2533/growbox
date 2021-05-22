@@ -1,7 +1,7 @@
 import os
 import time
 
-from logger import get_logger
+from logger import LOGGER
 
 os.system('modprobe w1-gpio')
 os.system('modprobe w1-therm')
@@ -10,7 +10,6 @@ DEVICE_PATH = '/sys/bus/w1/devices/{device_id}/w1_slave'
 DEVICE_ID_TOP = '28-3c01d075439b'
 DEVICE_ID_BOTTOM = '28-3c01d07524fa'
 DEVICE_ID_EXTERNAL = '28-3c01d6071af0'
-LOGGER = get_logger()
 
 
 class Thermometer:
