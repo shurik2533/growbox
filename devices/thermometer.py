@@ -10,50 +10,17 @@ DEVICE_PATH = '/sys/bus/w1/devices/{device_id}/w1_slave'
 DEVICE_ID_TOP = '28-3c01d075439b'
 DEVICE_ID_BOTTOM = '28-3c01d07524fa'
 DEVICE_ID_EXTERNAL = '28-3c01d6071af0'
-DEVICE_ID_MAP = {
-    'top': DEVICE_ID_TOP,
-    'bottom': DEVICE_ID_BOTTOM
-}
-MAX_TEMPERATURE = 26
-NORMAL_TEMPERATURE = 24
 LOGGER = get_logger()
 
 
-class TempController:
-    def __init__(self, name, fan, state):
-        self.pwm_speed = 0
-        self.name = name
-        self.fan = fan
-        self.state = state
+class Thermometer:
+    def __init__(self, device_id):
+        self.device_id = device_id
 
-    def temp_control(self):
-        temp_new = self.get_temperature(DEVICE_ID_MAP[self.name])
-        self.update_pwm(temp_new)
-
-    def check_external_temperature(self):
-        temp_external = self.get_temperature(DEVICE_ID_EXTERNAL)
-        self.state['thermometer']['external'] = temp_external
-        LOGGER.info(self.state)
-
-    def update_pwm(self, temp_new):
-        if temp_new >= MAX_TEMPERATURE:
-            self.pwm_speed = 100
-        elif temp_new <= NORMAL_TEMPERATURE:
-            if self.name == 'top':
-                self.pwm_speed = 10
-            else:
-                self.pwm_speed = 0
-        elif temp_new > NORMAL_TEMPERATURE and self.pwm_speed <= 90:
-            self.pwm_speed = self.pwm_speed + 10
-        self.fan.set_speed(self.pwm_speed)
-        self.state['fan'][self.name] = self.pwm_speed
-        self.state['thermometer'][self.name] = temp_new
-        LOGGER.info(self.state)
-
-    def get_temperature(self, device_id):
-        device_file = DEVICE_PATH.format(device_id=device_id)
+    def get_temperature(self):
+        device_file = DEVICE_PATH.format(device_id=self.device_id)
         lines = None
-        # TODO: логирование/оповещение, что термометр пропал
+        empty_reads = 0
         while not lines or len(lines) == 0 or lines[0].strip()[-3:] != 'YES':
             try:
                 with open(device_file, 'r') as f:
@@ -62,6 +29,9 @@ class TempController:
                 LOGGER.warn(f'file {device_file} not found')
                 time.sleep(3)
             if not lines:
+                empty_reads += 1
+                if empty_reads%100 == 0:
+                    LOGGER.warn(f'file {device_file} is empty too long')
                 time.sleep(0.2)
 
         temp_pos = lines[1].find('t=')
@@ -70,4 +40,4 @@ class TempController:
             temp_c = float(temp_string) / 1000.0
             return round(temp_c, 2)
         else:
-            raise ValueError(f"Can't read temperature for {device_id}")
+            raise ValueError(f"Can't read temperature for {self.device_id}")

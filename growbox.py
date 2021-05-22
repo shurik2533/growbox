@@ -1,15 +1,17 @@
 import schedule
 import time
 import RPi.GPIO as GPIO
-from devices.fan import Fan
-from devices.thermometer import TempController
+
+from controllers.sensors_data_collector import SensorsDataCollector
+from controllers.temperature_controller import TemperatureController
+from devices.fan import MAX_SPEED
 
 GPIO.setmode(GPIO.BCM)
 
 STATE = {
     'fan': {
-        'top': None,
-        'bottom': None
+        'top': MAX_SPEED,
+        'bottom': MAX_SPEED
     },
     'thermometer': {
         'top': None,
@@ -21,22 +23,16 @@ STATE = {
 
 def main():
     try:
-        fan_top = Fan(17)
-        fan_bottom = Fan(27)
+        temperature_controller = TemperatureController(STATE)
+        sensors_data_collector = SensorsDataCollector(STATE)
 
-        temp_top = TempController('top', fan_top, STATE)
-        temp_bottom = TempController('bottom', fan_bottom, STATE)
-
-        schedule.every(10).seconds.do(temp_top.temp_control)
-        schedule.every(10).seconds.do(temp_bottom.temp_control)
-        schedule.every(20).seconds.do(temp_top.check_external_temperature)
+        schedule.every(10).seconds.do(temperature_controller.update_fan_pwm)
+        schedule.every(10).seconds.do(sensors_data_collector.get_data)
 
         while True:
             schedule.run_pending()
             time.sleep(1)
     finally:
-        fan_top.stop()
-        fan_bottom.stop()
         GPIO.cleanup()
 
 

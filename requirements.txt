@@ -3,3 +3,4 @@ json-logging==1.2.11
 adafruit-ads1x15
 adafruit-circuitpython-si7021
 adafruit-circuitpython-ccs811
+mh-z19==3.0.2
