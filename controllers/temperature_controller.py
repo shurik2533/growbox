@@ -28,4 +28,4 @@ class TemperatureController:
 
         fan.set_speed(speed)
         self.state['fan'][name] = speed
-        self.state['thermometer'][self.name] = temperature
+        self.state['thermometer'][name] = temperature
