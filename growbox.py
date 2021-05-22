@@ -20,6 +20,10 @@ STATE = {
         'top': None,
         'bottom': None,
         'external': None
+    },
+    'light': {
+        '1': 'OFF',
+        '2': 'OFF'
     }
 }
 
