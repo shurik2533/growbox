@@ -17,5 +17,9 @@ STATE = {
     'humidity': {
         'humidity': None,
         'temperature': None
+    },
+    'co2': {
+        'co2': None,
+        'temperature': None
     }
 }
