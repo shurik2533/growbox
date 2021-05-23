@@ -25,5 +25,9 @@ STATE = {
     'soil_moisture': {
         'top': None,
         'bottom': None
+    },
+    'last_watering_time': {
+        'top': None,
+        'bottom': None
     }
 }

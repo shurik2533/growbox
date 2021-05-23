@@ -5,6 +5,7 @@ import RPi.GPIO as GPIO
 from controllers.light_controller import LightController
 from controllers.sensors_data_collector import SensorsDataCollector
 from controllers.temperature_controller import TemperatureController
+from controllers.watering_controller import WateringController
 from logger import LOGGER
 from state import STATE
 
@@ -17,11 +18,14 @@ def main():
         temperature_controller = TemperatureController(STATE)
         sensors_data_collector = SensorsDataCollector(STATE)
         light_controller = LightController(STATE)
+        watering_controller = WateringController(STATE, 'top')
 
         schedule.every(10).seconds.do(temperature_controller.update_fan_pwm)
         schedule.every(10).seconds.do(sensors_data_collector.get_data)
         schedule.every(10).seconds.do(light_controller.control)
+        schedule.every(10).seconds.do(watering_controller.control)
         schedule.every(10).seconds.do(log_state)
+
 
         while True:
             schedule.run_pending()

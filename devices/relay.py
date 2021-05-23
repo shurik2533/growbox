@@ -6,10 +6,10 @@ GPIO.setmode(GPIO.BCM)
 LIGHT_1 = 8
 LIGHT_2 = 25
 HEAT = 7
-PUMP_1 = 9
-PUMP_2 = 11
+PUMP_TOP = 9
+PUMP_BOTTOM = 11
 
-CHANNELS = [LIGHT_1, LIGHT_2, HEAT, PUMP_1, PUMP_2]
+CHANNELS = [LIGHT_1, LIGHT_2, HEAT, PUMP_TOP, PUMP_BOTTOM]
 [GPIO.setup(channel, GPIO.OUT) for channel in CHANNELS]
 [GPIO.output(channel, GPIO.HIGH) for channel in CHANNELS]
 
