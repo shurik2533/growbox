@@ -21,5 +21,9 @@ STATE = {
     'co2': {
         'co2': None,
         'temperature': None
+    },
+    'soil_moisture': {
+        'top': None,
+        'bottom': None
     }
 }

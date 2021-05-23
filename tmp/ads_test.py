@@ -11,16 +11,6 @@ import Adafruit_ADS1x15
 # Create an ADS1115 ADC (16-bit) instance.
 adc = Adafruit_ADS1x15.ADS1115()
 
-def get_moisture(val):
-    val = val - 500;
-    if val < 0:
-        val = 0
-    elif val > 5000:
-        val = 5000
-    val = (1 - val/5000)*100
-    return round(val, 1)
-
-
 # Or create an ADS1015 ADC (12-bit) instance.
 #adc = Adafruit_ADS1x15.ADS1015()
 
