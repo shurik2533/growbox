@@ -13,5 +13,9 @@ STATE = {
     'light': {
         '1': 'OFF',
         '2': 'OFF'
+    },
+    'humidity': {
+        'humidity': None,
+        'temperature': None
     }
 }

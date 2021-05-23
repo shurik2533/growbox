@@ -3,8 +3,8 @@ from datetime import datetime
 from devices import relay
 from devices.relay import LIGHT_1, LIGHT_2
 
-DAY_STARTS_AT = '22:25'
-DAY_ENDS_AT = '22:27'
+DAY_STARTS_AT = '21:00'
+DAY_ENDS_AT = '09:00'
 LIGHT_MODE = 'one' # one/both
 
 
