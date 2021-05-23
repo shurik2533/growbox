@@ -5,25 +5,8 @@ import RPi.GPIO as GPIO
 from controllers.light_controller import LightController
 from controllers.sensors_data_collector import SensorsDataCollector
 from controllers.temperature_controller import TemperatureController
-from devices.fan import MAX_SPEED
 from logger import LOGGER
-
-
-STATE = {
-    'fan': {
-        'top': MAX_SPEED,
-        'bottom': MAX_SPEED
-    },
-    'thermometer': {
-        'top': None,
-        'bottom': None,
-        'external': None
-    },
-    'light': {
-        '1': 'OFF',
-        '2': 'OFF'
-    }
-}
+from state import STATE
 
 
 def main():
