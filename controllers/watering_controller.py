@@ -24,10 +24,10 @@ class WateringController:
     def control(self):
 
         value = self.state['soil_moisture'][self.location]
-        min_next_watering = (datetime.now() > self.state['last_watering_time'][self.location] +
-                             timedelta(minutes=MIN_TIME_FOR_THE_NEXT_WATERING))
+        last_watering_time = self.state['last_watering_time'][self.location] or datetime.now()
+        min_next_watering = last_watering_time + timedelta(minutes=MIN_TIME_FOR_THE_NEXT_WATERING)
 
-        if value > self.threshold and min_next_watering:
+        if value > self.threshold and datetime.now() > min_next_watering:
             try:
                 relay.on(self.pin)
                 self.state['last_watering_time'][self.location] = datetime.now()
