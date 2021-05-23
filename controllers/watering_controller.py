@@ -24,7 +24,7 @@ class WateringController:
     def control(self):
 
         value = self.state['soil_moisture'][self.location]
-        last_watering_time = self.state['last_watering_time'][self.location] or datetime.now()
+        last_watering_time = self.state['last_watering_time'][self.location]
         min_next_watering = last_watering_time + timedelta(minutes=MIN_TIME_FOR_THE_NEXT_WATERING)
 
         if value > self.threshold and datetime.now() > min_next_watering:

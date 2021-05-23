@@ -1,4 +1,5 @@
 from devices.fan import MAX_SPEED
+from datetime import datetime
 
 STATE = {
     'fan': {
@@ -27,7 +28,7 @@ STATE = {
         'bottom': None
     },
     'last_watering_time': {
-        'top': None,
-        'bottom': None
+        'top': datetime.now(),
+        'bottom': datetime.now()
     }
 }
