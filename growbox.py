@@ -1,3 +1,6 @@
+import queue
+import threading
+
 import schedule
 import time
 import RPi.GPIO as GPIO
@@ -11,6 +14,14 @@ from state import STATE
 
 
 def main():
+    def worker_main():
+        while True:
+            job_func = jobqueue.get()
+            job_func()
+            jobqueue.task_done()
+
+    jobqueue = queue.Queue()
+
     try:
         def log_state():
             LOGGER.info(STATE)
@@ -20,12 +31,14 @@ def main():
         light_controller = LightController(STATE)
         watering_controller = WateringController(STATE, 'top')
 
-        schedule.every(10).seconds.do(temperature_controller.update_fan_pwm)
-        schedule.every(10).seconds.do(sensors_data_collector.get_data)
-        schedule.every(10).seconds.do(light_controller.control)
-        schedule.every(10).seconds.do(watering_controller.control)
-        schedule.every(10).seconds.do(log_state)
+        schedule.every(10).seconds.do(jobqueue.put, temperature_controller.update_fan_pwm)
+        schedule.every(10).seconds.do(jobqueue.put, sensors_data_collector.get_data)
+        schedule.every(10).seconds.do(jobqueue.put, light_controller.control)
+        schedule.every(10).seconds.do(jobqueue.put, watering_controller.control)
+        schedule.every(10).seconds.do(jobqueue.put, log_state)
 
+        worker_thread = threading.Thread(target=worker_main)
+        worker_thread.start()
 
         while True:
             schedule.run_pending()
