@@ -6,6 +6,7 @@ from devices.relay import LIGHT_1, LIGHT_2
 DAY_STARTS_AT = '21:00'
 DAY_ENDS_AT = '09:00'
 LIGHT_MODE = 'one' # one/both
+MAX_TEMPERATURE = 33
 
 
 class LightController:
@@ -30,9 +31,10 @@ class LightController:
             relay.off(LIGHT_2)
             self.state['light']['2'] = 'OFF'
 
+    def _is_light_on(self):
+        if max(self.state['thermometer']['top'], self.state['thermometer']['bottom']) > MAX_TEMPERATURE:
+            return False
 
-    @staticmethod
-    def _is_light_on():
         now = datetime.now()
         minutes_since_midnight = (now - now.replace(hour=0, minute=0, second=0, microsecond=0)).total_seconds()/60
 
