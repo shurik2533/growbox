@@ -30,5 +30,6 @@ STATE = {
     'last_watering_time': {
         'top': datetime.now(),
         'bottom': datetime.now()
-    }
+    },
+    'heat': None
 }
