@@ -23,7 +23,7 @@ class TemperatureController:
             speed = MAX_SPEED
         elif temperature <= NORMAL_TEMPERATURE:
             speed = fan.min_speed
-        elif temperature > NORMAL_TEMPERATURE and self.state['fan'][name] <= 90:
+        elif temperature > NORMAL_TEMPERATURE and self.state['fan'][name] <= MAX_TEMPERATURE-10:
             speed = self.state['fan'][name] + 10
         else:
             speed = MAX_SPEED

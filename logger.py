@@ -8,6 +8,8 @@ def _get_logger():
     logger = logging.getLogger(__name__)
     logger.setLevel(logging.DEBUG)
     logger.addHandler(logging.StreamHandler(sys.stdout))
+    file_handler = logging.FileHandler("logs/growbox.log")
+    logger.addHandler(file_handler)
     return logger
 
 

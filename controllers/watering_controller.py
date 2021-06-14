@@ -3,10 +3,10 @@ from datetime import datetime, timedelta
 from devices import relay
 from devices.relay import PUMP_TOP, PUMP_BOTTOM
 
-TOP_THRESHOLD = 25000
-BOTTOM_THRESHOLD = 25000
+TOP_THRESHOLD = 20000
+BOTTOM_THRESHOLD = 20000
 WATERING_TIME = 10  # sec
-MIN_TIME_FOR_THE_NEXT_WATERING = 1  # min
+MIN_TIME_FOR_THE_NEXT_WATERING = 5  # min
 
 
 class WateringController:
