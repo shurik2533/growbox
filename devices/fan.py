@@ -1,9 +1,11 @@
 import RPi.GPIO as GPIO
 
+from config.config import MODE
+
 FAN_TOP_PIN = 17
 FAN_BOTTOM_PIN = 27
 
-MAX_SPEED = 100
+MAX_SPEED = MODE['fan']['max_speed']
 
 
 class Fan:

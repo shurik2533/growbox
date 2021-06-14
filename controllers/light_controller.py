@@ -1,11 +1,12 @@
 from datetime import datetime
 
+from config.config import MODE
 from devices import relay
 from devices.relay import LIGHT_1, LIGHT_2
 
 DAY_STARTS_AT = '21:00'
 DAY_ENDS_AT = '09:00'
-LIGHT_MODE = 'one' # one/both
+LIGHT_MODE = 'one'  # one/both
 MAX_TEMPERATURE = 33
 
 
@@ -32,6 +33,8 @@ class LightController:
             self.state['light']['2'] = 'OFF'
 
     def _is_light_on(self):
+        if MODE['light'] == 'OFF':
+            return False
         if max(self.state['thermometer']['top'], self.state['thermometer']['bottom']) > MAX_TEMPERATURE:
             return False
 
