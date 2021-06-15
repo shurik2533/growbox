@@ -5,8 +5,8 @@ from devices.relay import PUMP_TOP, PUMP_BOTTOM
 
 TOP_THRESHOLD = 25000
 BOTTOM_THRESHOLD = 25000
-WATERING_TIME = 60  # sec
-MIN_TIME_FOR_THE_NEXT_WATERING = 30  # min
+WATERING_TIME = 30  # sec
+MIN_TIME_FOR_THE_NEXT_WATERING = 60  # min
 
 
 class WateringController:
