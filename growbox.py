@@ -1,3 +1,5 @@
+import datetime
+import json
 import queue
 import threading
 
@@ -25,7 +27,10 @@ def main():
 
     try:
         def log_state():
-            LOGGER.info(STATE)
+            def default(o):
+                if isinstance(o, (datetime.date, datetime.datetime)):
+                    return o.isoformat()
+            LOGGER.info(json.dumps(STATE, default=default))
 
         temperature_controller = TemperatureController(STATE)
         sensors_data_collector = SensorsDataCollector(STATE)
