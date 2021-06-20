@@ -6,7 +6,7 @@ from devices.relay import PUMP_TOP, PUMP_BOTTOM
 TOP_THRESHOLD = 28000
 BOTTOM_THRESHOLD = 28000
 WATERING_TIME = 30  # sec
-MIN_TIME_FOR_THE_NEXT_WATERING = 60  # min
+MIN_TIME_FOR_THE_NEXT_WATERING = 240  # min
 
 
 class WateringController:
@@ -26,7 +26,7 @@ class WateringController:
         last_watering_time = self.state['last_watering_time'][self.location]
         min_next_watering = last_watering_time + timedelta(minutes=MIN_TIME_FOR_THE_NEXT_WATERING)
 
-        if value > self.threshold and datetime.now() > min_next_watering:
+        if datetime.now() > min_next_watering:
             try:
                 relay.on(self.pin)
                 self.state['last_watering_time'][self.location] = datetime.now()
