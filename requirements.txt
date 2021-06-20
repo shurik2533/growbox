@@ -5,3 +5,4 @@ adafruit-circuitpython-si7021
 mh-z19==3.0.2
 pytest==6.2.4
 freezegun==1.1.0
+joblib==1.0.1

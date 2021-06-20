@@ -1,3 +1,5 @@
+import joblib as joblib
+
 from devices.fan import MAX_SPEED
 from datetime import datetime
 
@@ -33,3 +35,12 @@ STATE = {
     },
     'heat': None
 }
+
+
+try:
+    _state = joblib.load('/tmp/state.joblib')
+    STATE['last_watering_time'] = _state['last_watering_time']
+    STATE['light'] = _state['light']
+    STATE['heat'] = _state['heat']
+except FileNotFoundError:
+    pass

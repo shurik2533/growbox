@@ -3,6 +3,7 @@ import json
 import queue
 import threading
 
+import joblib
 import schedule
 import time
 import RPi.GPIO as GPIO
@@ -31,6 +32,7 @@ def main():
                 if isinstance(o, (datetime.date, datetime.datetime)):
                     return o.isoformat()
             LOGGER.info(json.dumps(STATE, default=default))
+            joblib.dump('/tmp/state.joblib')
 
         temperature_controller = TemperatureController(STATE)
         sensors_data_collector = SensorsDataCollector(STATE)
