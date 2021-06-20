@@ -35,7 +35,7 @@ def main():
                 if isinstance(o, (datetime.date, datetime.datetime)):
                     return o.isoformat()
             LOGGER.info(json.dumps(STATE, default=default))
-            joblib.dump('/tmp/state.joblib')
+            joblib.dump(STATE, '/tmp/state.joblib')
 
         temperature_controller = TemperatureController(STATE)
         sensors_data_collector = SensorsDataCollector(STATE)
@@ -58,6 +58,8 @@ def main():
         while True:
             schedule.run_pending()
             time.sleep(1)
+    except:
+        LOGGER.exception('')
     finally:
         temperature_controller.stop()
         GPIO.cleanup()
