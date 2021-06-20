@@ -21,7 +21,10 @@ def main():
     def worker_main():
         while True:
             job_func = jobqueue.get()
-            job_func()
+            try:
+                job_func()
+            except:
+                LOGGER.exception('')
             jobqueue.task_done()
 
     jobqueue = queue.Queue()
