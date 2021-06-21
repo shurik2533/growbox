@@ -19,6 +19,8 @@ class TemperatureController:
 
     def _update_fan_pwm(self, fan, thermometer, name):
         temperature = thermometer.get_temperature()
+        if not temperature:
+            return
         if temperature >= MAX_TEMPERATURE:
             speed = MAX_SPEED
         elif temperature <= NORMAL_TEMPERATURE:

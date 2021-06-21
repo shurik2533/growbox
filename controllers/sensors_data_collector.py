@@ -13,7 +13,9 @@ class SensorsDataCollector:
         self.soil_moisture = SoilMoisture()
 
     def get_data(self):
-        self.state['thermometer']['external'] = self.thermometer_external.get_temperature()
+        temperature = self.thermometer_external.get_temperature()
+        if temperature:
+            self.state['thermometer']['external'] = temperature
 
         humidity_sensor_data = self.humidity_sensor.get_data()
         self.state['humidity']['humidity'] = humidity_sensor_data['humidity']

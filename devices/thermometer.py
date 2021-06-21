@@ -30,7 +30,7 @@ class Thermometer:
             if not lines:
                 empty_reads += 1
                 if empty_reads%100 == 0:
-                    LOGGER.warn(f'file {device_file} is empty too long')
+                    LOGGER.error(f'file {device_file} is empty too long')
                 time.sleep(0.2)
 
         temp_pos = lines[1].find('t=')
@@ -39,4 +39,5 @@ class Thermometer:
             temp_c = float(temp_string) / 1000.0
             return round(temp_c, 2)
         else:
-            raise ValueError(f"Can't read temperature for {self.device_id}")
+            LOGGER.error(f"Can't read temperature for {self.device_id}")
+            return None
