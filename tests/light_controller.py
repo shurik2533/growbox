@@ -4,12 +4,19 @@ from unittest.mock import call
 import fake_rpi
 from freezegun import freeze_time
 
+from config import config
+from config.config import MODES
+
 sys.modules['RPi'] = fake_rpi.RPi     # Fake RPi
 sys.modules['RPi.GPIO'] = fake_rpi.RPi.GPIO # Fake GPIO
+config.MODE = MODES['vegetation']
 
 from controllers.light_controller import LightController
 from controllers import light_controller
 from state import STATE
+
+STATE['thermometer']['top'] = 24
+STATE['thermometer']['bottom'] = 24
 
 
 @freeze_time("2021-05-23 20:00")
