@@ -4,8 +4,8 @@ from config.config import MODE
 from devices import relay
 from devices.relay import LIGHT_1, LIGHT_2
 
-DAY_STARTS_AT = '21:00'
-DAY_ENDS_AT = '09:00'
+DAY_STARTS_AT = '10:00'
+DAY_ENDS_AT = '22:00'
 LIGHT_MODE = 'one'  # one/both
 MAX_TEMPERATURE = 33
 

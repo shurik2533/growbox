@@ -13,4 +13,4 @@ MODES = {
     }
 }
 
-MODE = MODES['planting']
+MODE = MODES['vegetation']
