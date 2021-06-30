@@ -7,3 +7,4 @@ pytest==6.2.4
 freezegun==1.1.0
 joblib==1.0.1
 supervisor==4.2.2
+mysql-connector-python==8.0.25

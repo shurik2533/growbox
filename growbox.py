@@ -13,6 +13,7 @@ from controllers.light_controller import LightController
 from controllers.sensors_data_collector import SensorsDataCollector
 from controllers.temperature_controller import TemperatureController
 from controllers.watering_controller import WateringController
+from db.log import save_state_to_db
 from logger import LOGGER
 from state import STATE
 
@@ -34,8 +35,11 @@ def main():
             def default(o):
                 if isinstance(o, (datetime.date, datetime.datetime)):
                     return o.isoformat()
-            LOGGER.info(json.dumps(STATE, default=default))
-            joblib.dump(STATE, '/tmp/state.joblib')
+            state_string = json.dumps(STATE, default=default)
+            LOGGER.info(state_string)
+            log_state(state_string)
+            save_state_to_db(state_string)
+            joblib.dump(STATE, 'state.joblib')
 
         temperature_controller = TemperatureController(STATE)
         sensors_data_collector = SensorsDataCollector(STATE)
