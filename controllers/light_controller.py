@@ -6,7 +6,7 @@ from devices.relay import LIGHT_1, LIGHT_2
 
 DAY_STARTS_AT = '10:00'
 DAY_ENDS_AT = '22:00'
-LIGHT_MODE = 'one'  # one/both
+LIGHT_MODE = 'both'  # one/both
 MAX_TEMPERATURE = 33
 
 
