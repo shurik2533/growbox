@@ -37,7 +37,6 @@ def main():
                     return o.isoformat()
             state_string = json.dumps(STATE, default=default)
             LOGGER.info(state_string)
-            log_state(state_string)
             save_state_to_db(state_string)
             joblib.dump(STATE, 'state.joblib')
 
