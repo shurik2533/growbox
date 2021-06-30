@@ -12,3 +12,6 @@ eggs/
 .eggs/
 
 logs/*
+
+state.joblib
+config/db.py
