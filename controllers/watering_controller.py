@@ -1,35 +1,25 @@
-import time
-from datetime import datetime, timedelta
+import threading
+from datetime import datetime
 from devices import relay
 from devices.relay import PUMP_TOP, PUMP_BOTTOM
 
-TOP_THRESHOLD = 28000
-BOTTOM_THRESHOLD = 28000
 WATERING_TIME = 30  # sec
-MIN_TIME_FOR_THE_NEXT_WATERING = 600  # min
 
 
 class WateringController:
     def __init__(self, state, location):
         self.state = state
         if location == 'top':
-            self.threshold = TOP_THRESHOLD
             self.pin = PUMP_TOP
         else:
-            self.threshold = BOTTOM_THRESHOLD
             self.pin = PUMP_BOTTOM
 
         self.location = location
 
     def control(self):
-        value = self.state['soil_moisture'][self.location]
-        last_watering_time = self.state['last_watering_time'][self.location]
-        min_next_watering = last_watering_time + timedelta(minutes=MIN_TIME_FOR_THE_NEXT_WATERING)
-
-        if datetime.now() > min_next_watering:
-            try:
-                relay.on(self.pin)
-                self.state['last_watering_time'][self.location] = datetime.now()
-                time.sleep(WATERING_TIME)
-            finally:
-                relay.off(self.pin)
+        def off():
+            relay.off(self.pin)
+        relay.on(self.pin)
+        self.state['last_watering_time'][self.location] = datetime.now()
+        timer = threading.Timer(WATERING_TIME, off)
+        timer.start()

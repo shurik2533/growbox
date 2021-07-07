@@ -49,10 +49,12 @@ def main():
 
         schedule.every(10).seconds.do(jobqueue.put, temperature_controller.update_fan_pwm)
         schedule.every(10).seconds.do(jobqueue.put, sensors_data_collector.get_data)
-        schedule.every(60).seconds.do(jobqueue.put, light_controller.control)
-        schedule.every(10).seconds.do(jobqueue.put, watering_controller_top.control)
-        schedule.every(10).seconds.do(jobqueue.put, watering_controller_bottom.control)
-        schedule.every(10).seconds.do(jobqueue.put, heat_controller.control)
+        schedule.every(120).seconds.do(jobqueue.put, light_controller.control)
+        schedule.every().day.at("10:30").do(watering_controller_top.control)
+        schedule.every().day.at("10:30").do(watering_controller_bottom.control)
+        schedule.every().day.at("20:30").do(watering_controller_top.control)
+        schedule.every().day.at("20:30").do(watering_controller_bottom.control)
+        schedule.every(120).seconds.do(jobqueue.put, heat_controller.control)
         schedule.every(10).seconds.do(jobqueue.put, log_state)
 
         worker_thread = threading.Thread(target=worker_main)
@@ -64,7 +66,6 @@ def main():
     except:
         LOGGER.exception('')
     finally:
-        temperature_controller.stop()
         GPIO.cleanup()
 
 

@@ -1,13 +1,14 @@
 from datetime import datetime
 
 from config.config import MODE
+from controllers.temperature_controller import BOTH_LIGHT_TEMPERATURE_THRESHOLD
 from devices import relay
 from devices.relay import LIGHT_1, LIGHT_2
 
 DAY_STARTS_AT = '10:00'
 DAY_ENDS_AT = '22:00'
 LIGHT_MODE = 'both'  # one/both
-MAX_TEMPERATURE = 33
+
 
 
 class LightController:
@@ -35,7 +36,7 @@ class LightController:
     def _is_light_on(self):
         if MODE['light'] == 'OFF':
             return False
-        if max(self.state['thermometer']['top'], self.state['thermometer']['bottom']) > MAX_TEMPERATURE:
+        if max(self.state['thermometer']['top'], self.state['thermometer']['bottom']) > BOTH_LIGHT_TEMPERATURE_THRESHOLD:
             return False
 
         now = datetime.now()
@@ -50,4 +51,3 @@ class LightController:
             return (0 <= minutes_since_midnight <= minutes_end) or (minutes_start <= minutes_since_midnight <= 24*60)
         else:
             return minutes_start <= minutes_since_midnight <= minutes_end
-
