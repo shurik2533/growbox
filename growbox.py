@@ -49,7 +49,7 @@ def main():
 
         schedule.every(10).seconds.do(jobqueue.put, temperature_controller.update_fan_pwm)
         schedule.every(10).seconds.do(jobqueue.put, sensors_data_collector.get_data)
-        schedule.every(120).seconds.do(jobqueue.put, light_controller.control)
+        schedule.every(300).seconds.do(jobqueue.put, light_controller.control)
         schedule.every().day.at("10:30").do(jobqueue.put, watering_controller_top.control)
         schedule.every().day.at("10:30").do(jobqueue.put, watering_controller_bottom.control)
         schedule.every().day.at("20:30").do(jobqueue.put, watering_controller_top.control)

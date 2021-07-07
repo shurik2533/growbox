@@ -1,9 +1,10 @@
 import threading
+import time
 from datetime import datetime
 from devices import relay
 from devices.relay import PUMP_TOP, PUMP_BOTTOM
 
-WATERING_TIME = 30  # sec
+WATERING_TIME = 40  # sec
 
 
 class WateringController:
@@ -17,9 +18,9 @@ class WateringController:
         self.location = location
 
     def control(self):
-        def off():
+        try:
+            relay.on(self.pin)
+            self.state['last_watering_time'][self.location] = datetime.now()
+            time.sleep(WATERING_TIME)
+        finally:
             relay.off(self.pin)
-        relay.on(self.pin)
-        self.state['last_watering_time'][self.location] = datetime.now()
-        timer = threading.Timer(WATERING_TIME, off)
-        timer.start()
