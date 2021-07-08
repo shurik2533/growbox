@@ -29,8 +29,9 @@ class Thermometer:
                 time.sleep(3)
             if not lines:
                 empty_reads += 1
-                if empty_reads%100 == 0:
+                if empty_reads%300 == 0:
                     LOGGER.error(f'file {device_file} is empty too long')
+                    return None
                 time.sleep(0.2)
 
         temp_pos = lines[1].find('t=')
