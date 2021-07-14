@@ -3,6 +3,8 @@ import joblib as joblib
 from devices.fan import MAX_SPEED
 from datetime import datetime
 
+STATE_PATH = 'state.joblib'
+
 STATE = {
     'fan': {
         'top': MAX_SPEED,
@@ -38,7 +40,7 @@ STATE = {
 
 
 try:
-    _state = joblib.load('/tmp/state.joblib')
+    _state = joblib.load(STATE_PATH)
     STATE['last_watering_time'] = _state['last_watering_time']
     STATE['light'] = _state['light']
     STATE['heat'] = _state['heat']

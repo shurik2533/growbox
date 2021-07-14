@@ -15,7 +15,7 @@ from controllers.temperature_controller import TemperatureController
 from controllers.watering_controller import WateringController
 from db.log import save_state_to_db
 from logger import LOGGER
-from state import STATE
+from state import STATE, STATE_PATH
 
 
 def main():
@@ -38,7 +38,7 @@ def main():
             state_string = json.dumps(STATE, default=default)
             LOGGER.info(state_string)
             save_state_to_db(state_string)
-            joblib.dump(STATE, 'state.joblib')
+            joblib.dump(STATE, STATE_PATH)
 
         temperature_controller = TemperatureController(STATE)
         sensors_data_collector = SensorsDataCollector(STATE)
