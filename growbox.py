@@ -42,7 +42,7 @@ def main():
 
         def log_job_queue_size():
             job_queue_len = jobqueue.qsize()
-            LOGGER.log(f'job_queue_len: {job_queue_len}')
+            LOGGER.info(f'job_queue_len: {job_queue_len}')
 
         temperature_controller = TemperatureController(STATE)
         sensors_data_collector = SensorsDataCollector(STATE)
