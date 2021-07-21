@@ -26,10 +26,10 @@ class Thermometer:
                     lines = f.readlines()
             except FileNotFoundError:
                 LOGGER.warn(f'file {device_file} not found')
-                time.sleep(3)
-            if not lines:
+                time.sleep(1)
+            if not lines or len(lines) == 0:
                 empty_reads += 1
-                if empty_reads%300 == 0:
+                if empty_reads%100 == 0:
                     LOGGER.error(f'file {device_file} is empty too long')
                     return None
                 time.sleep(0.2)
