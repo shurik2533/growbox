@@ -41,7 +41,7 @@ def main():
             joblib.dump(STATE, STATE_PATH)
 
         def log_job_queue_size():
-            job_queue_len = len(jobqueue)
+            job_queue_len = jobqueue.qsize()
             LOGGER.log(f'job_queue_len: {job_queue_len}')
 
         temperature_controller = TemperatureController(STATE)
