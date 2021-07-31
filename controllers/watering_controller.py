@@ -3,7 +3,8 @@ from datetime import datetime
 from devices import relay
 from devices.relay import PUMP_TOP, PUMP_BOTTOM
 
-WATERING_TIME = 60  # sec
+WATERING_TIME_TOP = 75  # sec
+WATERING_TIME_BOTTOM = 65  # sec
 
 
 class WateringController:
@@ -11,8 +12,10 @@ class WateringController:
         self.state = state
         if location == 'top':
             self.pin = PUMP_TOP
+            self.watering_time = WATERING_TIME_TOP
         else:
             self.pin = PUMP_BOTTOM
+            self.watering_time = WATERING_TIME_BOTTOM
 
         self.location = location
 
@@ -20,6 +23,6 @@ class WateringController:
         try:
             relay.on(self.pin)
             self.state['last_watering_time'][self.location] = datetime.now()
-            time.sleep(WATERING_TIME)
+            time.sleep(self.watering_time)
         finally:
             relay.off(self.pin)
