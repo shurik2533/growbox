@@ -5,8 +5,8 @@ from controllers.temperature_controller import BOTH_LIGHT_TEMPERATURE_THRESHOLD
 from devices import relay
 from devices.relay import LIGHT_1, LIGHT_2
 
-DAY_STARTS_AT = '09:00'
-DAY_ENDS_AT = '21:00'
+DAY_STARTS_AT = '08:30'
+DAY_ENDS_AT = '20:30'
 LIGHT_MODE = 'both'  # one/both
 
 
