@@ -36,3 +36,6 @@ Restart supervisor to load your growbox.conf`
 sudo supervisorctl update
 sudo supervisorctl restart growbox
 ```
+
+# Growbox dashboard project
+[https://github.com/shurik2533/growbox_panel](https://github.com/shurik2533/growbox_panel)
