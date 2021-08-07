@@ -3,8 +3,8 @@ from datetime import datetime
 from devices import relay
 from devices.relay import PUMP_TOP, PUMP_BOTTOM
 
-WATERING_TIME_TOP = 80  # sec
-WATERING_TIME_BOTTOM = 75  # sec
+WATERING_TIME_TOP = 90  # sec
+WATERING_TIME_BOTTOM = 80  # sec
 
 
 class WateringController:
