@@ -9,6 +9,21 @@ Growbox control based on Raspberry Pi. Supported devices/sensors:
 - PWM fans control
 - CO2 and Temperature Sensor: MH-Z19
 
+# Prepare
+- `sudo apt-get install -y python-smbus`
+- `sudo apt-get install -y i2c-tools`
+- Enable 1-Wire on your Raspberry Pi
+- Enable I2C  on your Raspberry Pi
+- Install `requirements.txt` for project Python environment
+- create `config/db.py` with the following content
+```
+USER = '***'
+PASSWORD = '***'
+DATABASE = '***'
+HOST = '***'
+PORT = '***'
+```
+
 # Running
 Works only with sudo because of CO2 sensor use `/dev/serial0` which requires root permission
 
