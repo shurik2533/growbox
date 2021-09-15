@@ -10,7 +10,6 @@ DAY_ENDS_AT = '20:00'
 LIGHT_MODE = 'both'  # one/both
 
 
-
 class LightController:
     def __init__(self, state):
         self.state = state
