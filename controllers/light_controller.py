@@ -6,7 +6,7 @@ from devices import relay
 from devices.relay import LIGHT_1, LIGHT_2
 
 DAY_STARTS_AT = '05:00'
-DAY_ENDS_AT = '20:00'
+DAY_ENDS_AT = '21:00'
 LIGHT_MODE = 'both'  # one/both
 
 
