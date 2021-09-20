@@ -3,7 +3,7 @@ from devices.thermometer import Thermometer, DEVICE_ID_TOP, DEVICE_ID_BOTTOM
 
 BOTH_LIGHT_TEMPERATURE_THRESHOLD = 31
 NORMAL_TEMPERATURE_MAX = 26
-NORMAL_TEMPERATURE = 24
+NORMAL_TEMPERATURE = 22
 
 
 class TemperatureController:
