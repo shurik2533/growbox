@@ -21,9 +21,9 @@ class SensorsDataCollector:
         self.state['humidity']['humidity'] = humidity_sensor_data['humidity']
         self.state['humidity']['temperature'] = humidity_sensor_data['temperature']
 
-        co2_sensor_data = self.co2_sensor.get_data()
-        self.state['co2']['co2'] = co2_sensor_data['co2']
-        self.state['co2']['temperature'] = co2_sensor_data['temperature']
+        # co2_sensor_data = self.co2_sensor.get_data()
+        # self.state['co2']['co2'] = co2_sensor_data['co2']
+        # self.state['co2']['temperature'] = co2_sensor_data['temperature']
 
         soil_moisture_data = self.soil_moisture.get_data()
         self.state['soil_moisture']['top'] = soil_moisture_data[0]
