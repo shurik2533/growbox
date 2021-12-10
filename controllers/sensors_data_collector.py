@@ -25,6 +25,6 @@ class SensorsDataCollector:
         # self.state['co2']['co2'] = co2_sensor_data['co2']
         # self.state['co2']['temperature'] = co2_sensor_data['temperature']
 
-        soil_moisture_data = self.soil_moisture.get_data()
-        self.state['soil_moisture']['top'] = soil_moisture_data[0]
-        self.state['soil_moisture']['bottom'] = soil_moisture_data[1]
+        # soil_moisture_data = self.soil_moisture.get_data()
+        # self.state['soil_moisture']['top'] = soil_moisture_data[0]
+        # self.state['soil_moisture']['bottom'] = soil_moisture_data[1]
