@@ -8,7 +8,7 @@ NORMAL_TEMPERATURE = 24
 
 class TemperatureController:
     def __init__(self, state):
-        self.fan_top = Fan(FAN_TOP_PIN, 0)
+        self.fan_top = Fan(FAN_TOP_PIN, 10)
         self.fan_bottom = Fan(FAN_BOTTOM_PIN, 0)
         self.thermometer_top = Thermometer(DEVICE_ID_TOP)
         self.thermometer_bottom = Thermometer(DEVICE_ID_BOTTOM)
