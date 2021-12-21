@@ -2,8 +2,8 @@ from devices.fan import Fan, FAN_TOP_PIN, FAN_BOTTOM_PIN, MAX_SPEED
 from devices.thermometer import Thermometer, DEVICE_ID_TOP, DEVICE_ID_BOTTOM
 
 BOTH_LIGHT_TEMPERATURE_THRESHOLD = 31
-NORMAL_TEMPERATURE_MAX = 26
-NORMAL_TEMPERATURE = 23
+NORMAL_TEMPERATURE_MAX = 28
+NORMAL_TEMPERATURE = 24
 
 
 class TemperatureController:
@@ -26,8 +26,8 @@ class TemperatureController:
             speed = MAX_SPEED
         elif temperature <= NORMAL_TEMPERATURE:
             speed = fan.min_speed
-        elif temperature > NORMAL_TEMPERATURE and self.state['fan'][name] <= NORMAL_TEMPERATURE_MAX-10:
-            speed = self.state['fan'][name] + 10
+        elif temperature > NORMAL_TEMPERATURE and self.state['fan'][name] <= MAX_SPEED - 5:
+            speed = self.state['fan'][name] + 5
         else:
             speed = MAX_SPEED
 
