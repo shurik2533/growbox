@@ -51,7 +51,7 @@ def main():
         watering_controller_bottom = WateringController(STATE, 'bottom')
         heat_controller = HeatController(STATE)
 
-        schedule.every(10).seconds.do(jobqueue.put, temperature_controller.update_fan_pwm)
+        schedule.every(20).seconds.do(jobqueue.put, temperature_controller.update_fan_pwm)
         schedule.every(10).seconds.do(jobqueue.put, sensors_data_collector.get_data)
         schedule.every(300).seconds.do(jobqueue.put, light_controller.control)
         schedule.every().day.at("09:30").do(jobqueue.put, watering_controller_top.control)
