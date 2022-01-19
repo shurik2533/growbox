@@ -7,19 +7,20 @@ from devices.thermometer import Thermometer, DEVICE_ID_EXTERNAL
 class SensorsDataCollector:
     def __init__(self, state):
         self.state = state
-        self.thermometer_external = Thermometer(DEVICE_ID_EXTERNAL)
-        self.humidity_sensor = Humidity()
-        self.co2_sensor = Co2()
-        self.soil_moisture = SoilMoisture()
+        # self.thermometer_external = Thermometer(DEVICE_ID_EXTERNAL)
+        # self.humidity_sensor = Humidity()
+        # self.co2_sensor = Co2()
+        # self.soil_moisture = SoilMoisture()
 
     def get_data(self):
-        temperature = self.thermometer_external.get_temperature()
-        if temperature:
-            self.state['thermometer']['external'] = temperature
+        pass
+        # temperature = self.thermometer_external.get_temperature()
+        # if temperature:
+        #     self.state['thermometer']['external'] = temperature
 
-        humidity_sensor_data = self.humidity_sensor.get_data()
-        self.state['humidity']['humidity'] = humidity_sensor_data['humidity']
-        self.state['humidity']['temperature'] = humidity_sensor_data['temperature']
+        # humidity_sensor_data = self.humidity_sensor.get_data()
+        # self.state['humidity']['humidity'] = humidity_sensor_data['humidity']
+        # self.state['humidity']['temperature'] = humidity_sensor_data['temperature']
 
         # co2_sensor_data = self.co2_sensor.get_data()
         # self.state['co2']['co2'] = co2_sensor_data['co2']
